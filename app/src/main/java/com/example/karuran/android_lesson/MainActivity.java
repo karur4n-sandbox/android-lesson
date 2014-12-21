@@ -13,7 +13,17 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        setContentView(ll);
+        
+        TextView tv1 = new TextView(this);
+        tv1.setText("ようこそ Android へ");
+        TextView tv2 = new TextView(this);
+        tv2.setText("Android をはじめましょう");
+        
+        ll.addView(tv1);
+        ll.addView(tv2);
     }
 
 
