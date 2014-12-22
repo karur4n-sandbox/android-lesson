@@ -17,14 +17,13 @@ public class MainActivity extends ActionBarActivity {
         ll.setOrientation(LinearLayout.VERTICAL);
         setContentView(ll);
         
-        TextView tv = new TextView(this);
-        tv.setText("いらっしゃいませ");
+        Button[] bt = new Button[10];
         
-        Button bt = new Button(this);
-        bt.setText("購入");
-        
-        ll.addView(tv);
-        ll.addView(bt);
+        for(int i=0; i<bt.length; i++) {
+            bt[i] = new Button(this);
+            bt[i].setText(Integer.toString(i));
+            ll.addView(bt[i]);
+        }
     }
 
 
