@@ -5,35 +5,32 @@ import android.app.*;
 import android.os.*;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.*;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    TextView tv;
+    Button bt;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TableLayout tl = new TableLayout(this);
-        setContentView(tl);
         
-        TableRow[] tr = new TableRow[10];
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        setContentView(ll);
         
-        TextView[] tv = new TextView[10];
-        Button[] bt = new Button[10];
+        tv = new TextView(this);
+        tv.setText("いらっしゃいませ");
+        bt = new Button(this);
+        bt.setText("購入");
         
-        for(int i=0; i<tr.length; i++) {
-            tr[i] = new TableRow(this);
-            
-            tv[i] = new TextView(this);
-            tv[i].setText("商品番号" + i + "-------");
-            bt[i] = new Button(this);
-            bt[i].setText("購入"); 
-            
-            tr[i].addView(tv[i]);
-            tr[i].addView(bt[i]);
-            
-            tl.addView(tr[i]);
-        }
+        ll.addView(tv);
+        ll.addView(bt);
+        
+        bt.setOnClickListener(new SampleClickListener());
     }
 
 
@@ -58,4 +55,12 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    
+    class SampleClickListener implements View.OnClickListener {
+        public void onClick(View v) {
+            tv.setText("ありがとうございます");
+
+        }
+    }
 }
+
