@@ -1,42 +1,47 @@
 package com.example.karuran.android_lesson;
 
-import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBarActivity;
-import android.graphics.*;
 import android.app.*;
 import android.os.*;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
+import android.view.*;
 import android.view.View;
+import android.webkit.*;
 import android.widget.*;
 
+public class MainActivity extends Activity {
 
-public class MainActivity extends ActionBarActivity {
-
-    ImageView[] iv = new ImageView[3];
+    Button[] bt = new Button[4];
+    WebView wv;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.HORIZONTAL);
-        ll.setGravity(Gravity.CENTER); 
-        setContentView(ll); 
+        TableLayout tl = new TableLayout(this);
+        setContentView(tl);
         
-        Bitmap bmp =
-                BitmapFactory.decodeResource(getResources(),
-                                             R.drawable.icon);
+        wv = new WebView(this);
+        wv.setWebViewClient(new WebViewClient());
+        wv.loadUrl("http://www.google.com");
         
-        for(int i=0; i<iv.length; i++) {
-            iv[i] = new ImageView(this);
-            iv[i].setImageBitmap(bmp);
-            ll.addView(iv[i]);
+        TableRow tr = new TableRow(this);
+        
+        for(int i=0; i<bt.length; i++) {
+            bt[i] = new Button(this);
+            tr.addView(bt[i]);
         }
-    }
 
+        bt[0].setText("←");
+        bt[1].setText("→");
+        bt[2].setText("+");
+        bt[3].setText("-");
+        
+        for(int i=0; i<bt.length; i++) {
+            bt[i].setOnClickListener(new SampleClickListener());
+        }
+        
+        tl.addView(tr);
+        tl.addView(wv);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,6 +63,25 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+    class SampleClickListener implements View.OnClickListener {
+        
+        public void onClick(View v) {
+            if(v == bt[0]) {
+                if(wv.canGoBack()) {
+                    wv.goBack();
+                }
+            } else if(v == bt[1]) {
+                if (wv.canGoForward()) {
+                    wv.goForward();
+                }
+            } else if(v == bt[2]) {
+                wv.zoomIn();
+            } else if(v == bt[3]) {
+                wv.zoomOut();
+            }
+        }
     }
 }
 
