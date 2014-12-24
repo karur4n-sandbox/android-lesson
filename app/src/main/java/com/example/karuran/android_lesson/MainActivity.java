@@ -25,13 +25,8 @@ public class MainActivity extends ActionBarActivity {
         
         tv = new TextView(this);
         tv.setText("いらっしゃいませ");
-        bt = new Button(this);
-        bt.setText("購入");
-        
+
         ll.addView(tv);
-        ll.addView(bt);
-        
-        bt.setOnTouchListener(new SampleTouchListner());
     }
 
 
@@ -57,18 +52,15 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    class SampleTouchListner implements View.OnTouchListener {
-        
-        public boolean onTouch(View v, MotionEvent e) {
-            
-            if(e.getAction() == MotionEvent.ACTION_DOWN) {
-                tv.setText("こんにちは");
-            } else if(e.getAction() == MotionEvent.ACTION_UP) {
-                tv.setText("さようなら");
-            }
-           
-            return true;
+    public boolean onTouchEvent(MotionEvent e) {
+
+        if(e.getAction() == MotionEvent.ACTION_DOWN) {
+            tv.setText("こんにちは");
+        } else if(e.getAction() == MotionEvent.ACTION_UP) {
+            tv.setText("さようなら");
         }
+
+        return true;
     }
 }
 
