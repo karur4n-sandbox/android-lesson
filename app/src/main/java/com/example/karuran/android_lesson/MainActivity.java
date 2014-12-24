@@ -26,12 +26,12 @@ public class MainActivity extends ActionBarActivity {
         tv = new TextView(this);
         tv.setText("いらっしゃいませ");
         bt = new Button(this);
-        bt.setText("購入");
+        bt.setText("こんにちは");
 
         ll.addView(tv);
         ll.addView(bt);
         
-        bt.setOnClickListener(new SampleClickListener());
+        bt.setOnTouchListener(new SampleTouchListener());
     }
 
 
@@ -57,11 +57,17 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    class SampleClickListener implements View.OnClickListener {
-        public void onClick(View v) {
-            bt.setText("Thanks!");
+    class SampleTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View v, MotionEvent e) {
+            
+            if(e.getAction() == MotionEvent.ACTION_DOWN) {
+                bt.setText("こんにちは");
+            } else if(e.getAction() == MotionEvent.ACTION_UP) {
+                bt.setText("さようなら");
+            }
+            
+            return true;
         }
-        
     }
 }
 
