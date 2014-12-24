@@ -5,6 +5,7 @@ import android.app.*;
 import android.os.*;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 
@@ -30,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
         ll.addView(tv);
         ll.addView(bt);
         
-        bt.setOnClickListener(new SampleClickListener());
+        bt.setOnTouchListener(new SampleTouchListner());
     }
 
 
@@ -56,10 +57,17 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    class SampleClickListener implements View.OnClickListener {
-        public void onClick(View v) {
-            tv.setText("ありがとうございます");
-
+    class SampleTouchListner implements View.OnTouchListener {
+        
+        public boolean onTouch(View v, MotionEvent e) {
+            
+            if(e.getAction() == MotionEvent.ACTION_DOWN) {
+                tv.setText("こんにちは");
+            } else if(e.getAction() == MotionEvent.ACTION_UP) {
+                tv.setText("さようなら");
+            }
+           
+            return true;
         }
     }
 }
