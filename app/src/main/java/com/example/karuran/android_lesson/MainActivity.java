@@ -1,8 +1,11 @@
 package com.example.karuran.android_lesson;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
+import android.graphics.*;
 import android.app.*;
 import android.os.*;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -12,26 +15,26 @@ import android.widget.*;
 
 public class MainActivity extends ActionBarActivity {
 
-    TextView tv;
-    Button bt;
+    ImageView[] iv = new ImageView[3];
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        setContentView(ll);
+        ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setGravity(Gravity.CENTER); 
+        setContentView(ll); 
         
-        tv = new TextView(this);
-        tv.setText("いらっしゃいませ");
-        bt = new Button(this);
-        bt.setText("こんにちは");
-
-        ll.addView(tv);
-        ll.addView(bt);
+        Bitmap bmp =
+                BitmapFactory.decodeResource(getResources(),
+                                             R.drawable.icon);
         
-        bt.setOnTouchListener(new SampleTouchListener());
+        for(int i=0; i<iv.length; i++) {
+            iv[i] = new ImageView(this);
+            iv[i].setImageBitmap(bmp);
+            ll.addView(iv[i]);
+        }
     }
 
 
@@ -55,19 +58,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    
-    class SampleTouchListener implements View.OnTouchListener {
-        public boolean onTouch(View v, MotionEvent e) {
-            
-            if(e.getAction() == MotionEvent.ACTION_DOWN) {
-                bt.setText("こんにちは");
-            } else if(e.getAction() == MotionEvent.ACTION_UP) {
-                bt.setText("さようなら");
-            }
-            
-            return true;
-        }
     }
 }
 
